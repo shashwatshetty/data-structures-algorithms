@@ -1,7 +1,7 @@
 import java.util.HashMap;
 /*
 Various Implementations of the Rod-Cutting problem.
-The Rod-Cutiing problem can be stated as,
+The Rod-Cutting problem can be stated as,
 "Given a rod of length n inches and a table of prices p(i) for i = 1,2,...n,
 determine the maximum revenue r(n) obtainable by cutting up the rod and selling the pieces."
  */
@@ -19,8 +19,7 @@ public class RodCut {
         prices.put(9,24);
         prices.put(10,30);
         for(int i = 1; i <= 3; i ++){
-            System.out.println("The max revenue for length "+i+" is: "+rodCutMemo(prices, i));
-
+            System.out.println("The max revenue for length "+i+" is: "+rodCutDP(prices, i));
         }
     }
 
@@ -124,5 +123,47 @@ public class RodCut {
         // store the result in the memo array at index rodLength
         memo[rodlength] = revenue;
         return revenue;
+    }
+
+    /*
+    A Dynamic Programming solution, which is very efficient with larger values of rodLength.
+
+    Pseudocode:
+        BOTTOM-UP-CUT-ROD(p, n)
+            let r[0..n] be a new array
+            r[0] = 0
+            for j = 1 to n
+                q = -INFINITY
+                for i = 1 to j
+                    q = max(q, p[i] + r[i - j])
+                r[j] = q
+            return r[n]
+     */
+
+    /*
+    Given: the table of prices and the length of the rod.
+    Returns: the maximum revenue that can be obtained from cutting/not cutting the rod.
+     */
+    public static int rodCutDP(HashMap<Integer, Integer> prices, int rodLength){
+        // table that stores the max revenue for an equivalent length.
+        HashMap<Integer, Integer> revenues = new HashMap<Integer, Integer>();
+        // base case when rodLength is 0, revenue is 0.
+        revenues.put(0,0);
+        // outer loop runs from 1 upto given rodLength
+        for(int i = 1; i <= rodLength; i++){
+            int revenue = Integer.MIN_VALUE;
+            // inner loop runs upto the length under consideration
+            // this ensures, that the max revenue for a length has been calculated
+            // before it is accessed for higher lengths.
+            for(int j  = 1; j <= i; j++){
+                // add price to the result computed for the other half.
+                // since both loops are in ascending order, we wont come across a length that
+                // hasn't been calculated or the base case.
+                revenue = Math.max(revenue, prices.get(j) + revenues.get(i - j));
+            }
+            // store the result in the memo array at index rodLength
+            revenues.put(i, revenue);
+        }
+        return revenues.get(rodLength);
     }
 }
