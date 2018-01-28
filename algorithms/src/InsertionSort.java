@@ -15,7 +15,7 @@ public class InsertionSort {
     Given: Unsorted array
     Effect: Sorts the array in ascending order.
      */
-    public static void inertionSort(int[] input){
+    public static void insertionSort(int[] input){
         // outer loop considers one element and checks for the correct position
         // it should be placed in the inner loop
         for(int j = 1; j < input.length; j++){
@@ -31,7 +31,7 @@ public class InsertionSort {
 
     public static void main(String args[]){
         int[] arr1 = {3,5,7,2,1,4,6,9,0,8};
-        InsertionSort.inertionSort(arr1);
+        InsertionSort.insertionSort(arr1);
         System.out.println("The Sorted Array is: ");
         for(int e:arr1){
             System.out.print(e);
