@@ -29,18 +29,32 @@ public class HeapSort {
 
     public static Heap buildMaxHeap(int[] arr){
         Heap a = new Heap(arr);
-        for(int i = arr.length/2; i >=0; i--){
+        for(int i = arr.length/2; i >= 0; i--){
             maxHeapify(a, i);
+        }
+        return a;
+    }
+
+    public static Heap heapSort(int[] arr){
+        Heap a = buildMaxHeap(arr);
+        for(int i = arr.length - 1; i >= 0; i--){
+            int temp = a.arr[i];
+            a.arr[i] = a.arr[0];
+            a.arr[0] = temp;
+            a.heapSize--;
+            maxHeapify(a, 0);
         }
         return a;
     }
 
     public static void main(String args[]){
         int[] arr = {4, 1, 3, 2, 16, 9, 10, 14, 8, 7};
-        Heap res = buildMaxHeap(arr);
+        //Heap res = buildMaxHeap(arr);
+        Heap res = heapSort(arr);
         for(int e : res.arr){
             System.out.print(e+" ");
         }
+
     }
 }
 
