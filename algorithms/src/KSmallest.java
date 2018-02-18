@@ -1,5 +1,3 @@
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.function.Supplier;
@@ -38,7 +36,7 @@ public class KSmallest {
         return res;
     }
 
-    // benchmarking code to calculate the running time for the calculateLevenshtein method.
+    // benchmarking code to calculate the running time for the smallest method.
     public static <T> int[] time (Supplier<T> thunk) {
         System.out.println();
         try {
