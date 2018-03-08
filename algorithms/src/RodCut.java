@@ -1,4 +1,5 @@
 import java.util.HashMap;
+
 /*
 Various Implementations of the Rod-Cutting problem.
 The Rod-Cutting problem can be stated as,
@@ -18,9 +19,11 @@ public class RodCut {
         prices.put(8,20);
         prices.put(9,24);
         prices.put(10,30);
-        for(int i = 1; i <= 3; i ++){
-            System.out.println("The max revenue for length "+i+" is: "+rodCutDP(prices, i));
-        }
+
+        // correctness & timing examples
+        System.out.println("Max. Revenue for n = 8 using Memoization: "+RunTimeCalculator.time(() -> rodCutMemo(prices, 8)));
+        System.out.println("Max. Revenue for n = 8 using Recursion: "+RunTimeCalculator.time(() -> rodCutRecursive(prices, 8)));
+        System.out.println("Max. Revenue for n = 8 using DP: "+RunTimeCalculator.time(() -> rodCutDP(prices, 8)));
     }
 
     /*
@@ -129,15 +132,17 @@ public class RodCut {
     A Dynamic Programming solution, which is very efficient with larger values of rodLength.
 
     Pseudocode:
-        BOTTOM-UP-CUT-ROD(p, n)
-            let r[0..n] be a new array
-            r[0] = 0
-            for j = 1 to n
-                q = -INFINITY
-                for i = 1 to j
-                    q = max(q, p[i] + r[i - j])
-                r[j] = q
-            return r[n]
+        EXTENDED-BOTTOM-UP-CUT-ROD(p, n)
+		let r[0..n] and s[0..n] be new arrays
+		r[0] = 0
+		for j = 1 to n
+			q = -INFINITY
+			for i = 1 to j
+				if q < p[i] + r[j - i]
+					q = p[i] + r[j - i]
+					s[j] = i
+			r[j] = q
+		return r and s
      */
 
     /*
@@ -147,6 +152,8 @@ public class RodCut {
     public static int rodCutDP(HashMap<Integer, Integer> prices, int rodLength){
         // table that stores the max revenue for an equivalent length.
         HashMap<Integer, Integer> revenues = new HashMap<Integer, Integer>();
+        // array to store the solution pieces for the max revenue
+        int[] solution = new int[rodLength];
         // base case when rodLength is 0, revenue is 0.
         revenues.put(0,0);
         // outer loop runs from 1 upto given rodLength
@@ -159,11 +166,39 @@ public class RodCut {
                 // add price to the result computed for the other half.
                 // since both loops are in ascending order, we wont come across a length that
                 // hasn't been calculated or the base case.
-                revenue = Math.max(revenue, prices.get(j) + revenues.get(i - j));
+                if(revenue < prices.get(j) + revenues.get(i - j)) {
+                    revenue = prices.get(j) + revenues.get(i - j);
+                    // store the length of the piece with max. revenue in the solution array
+                    solution[i - 1] = j;
+                }
             }
             // store the result in the memo array at index rodLength
             revenues.put(i, revenue);
         }
+        // prints the solution of pieces to the maximum revenue
+        printSolution(solution, rodLength);
         return revenues.get(rodLength);
+    }
+
+    /*
+    Pseudocode:
+        PRINT-CUT-ROD-SOLUTION(p, n)
+            (r, s) = EXTENDED-BOTTOM-UP-CUT-ROD(p, n)
+            while n > 0
+        print s[n]
+        n = n - s[n]
+    */
+
+    /*
+    Given: the solution of pieces and the length of the rod.
+    Effect: prints the solution to the screen.
+     */
+    public static void printSolution(int[] sol, int n){
+        System.out.print("The Solution for length "+ n +" is: ");
+        while(n > 0){
+            System.out.print(sol[n - 1]+"\t");
+            n = n - sol[n - 1];
+        }
+        System.out.println();
     }
 }
