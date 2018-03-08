@@ -7,7 +7,7 @@ public class KSmallest {
      Given:   an array of n integers and a non-negative integer k <= n,
      Returns: an array of length k containing the k smallest
                 values in the given array, in non-decreasing order.
-     Run Time: Big-O(k.n)
+     Run Time: Big-O(k.n) on average case.
    */
     public static int[] smallest(int[] input, int k){
         int[] res = new int[k];
@@ -36,23 +36,6 @@ public class KSmallest {
         return res;
     }
 
-    // benchmarking code to calculate the running time for the smallest method.
-    public static <T> int[] time (Supplier<T> thunk) {
-        System.out.println();
-        try {
-            long t0 = System.currentTimeMillis();
-            int[] result = (int[])thunk.get();
-            long t1 = System.currentTimeMillis();
-            long t = t1 - t0;
-            System.out.println ( "Program Runs in " + t + " milliseconds!");
-            return result;
-        }
-        catch (Error e) {
-            System.out.println ("\nERROR: " + e);
-            return null;
-        }
-    }
-
     public static void printArray(int[] res){
         for(int e : res) {
             System.out.print(e + " ");
@@ -71,7 +54,7 @@ public class KSmallest {
             test[i] = r.nextInt(Integer.MAX_VALUE);
         System.out.println("For input array: ");
         printArray(test);
-        int[] res = time(() -> smallest(test, k));
+        int[] res = (int[])RunTimeCalculator.time(() -> smallest(test, k));
         printArray(res);
     }
 }
