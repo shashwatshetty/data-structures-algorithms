@@ -133,16 +133,16 @@ public class RodCut {
 
     Pseudocode:
         EXTENDED-BOTTOM-UP-CUT-ROD(p, n)
-		let r[0..n] and s[0..n] be new arrays
-		r[0] = 0
-		for j = 1 to n
-			q = -INFINITY
-			for i = 1 to j
-				if q < p[i] + r[j - i]
-					q = p[i] + r[j - i]
-					s[j] = i
-			r[j] = q
-		return r and s
+            let r[0..n] and s[0..n] be new arrays
+            r[0] = 0
+            for j = 1 to n
+                q = -INFINITY
+                for i = 1 to j
+                    if q < p[i] + r[j - i]
+                        q = p[i] + r[j - i]
+                        s[j] = i
+                r[j] = q
+            return r and s
      */
 
     /*
