@@ -4,6 +4,14 @@ Problem is solved using Dynamic Programming by taking advantage
 of the overlapping sub-problems and optimal substructure of the LCS.
  */
 public class LongestCommonSubsequence {
+
+    public static void main(String args[]){
+        // correctness & timing examples
+        RunTimeCalculator.time(() -> lcsLength("HELLO", "AERLKO"));
+        RunTimeCalculator.time(() -> lcsLength("ACCGGTCGAGTGCGCGGAAGCCGGCCGAA", "GTCGTTCGGAATGCCGTTGCTCTGTAAA"));
+    }
+
+
     /*
     Pseudocode:
         LCS-LENGTH(X, Y)
@@ -32,7 +40,7 @@ public class LongestCommonSubsequence {
     Given: two strings
     Effect: prints the longest common subsequence of the given two strings.
      */
-    public static void lcsLength(String X, String Y){
+    public static int lcsLength(String X, String Y){
         // length of string 1
         int m = X.length();
         // length of string 2
@@ -66,6 +74,8 @@ public class LongestCommonSubsequence {
         }
         // method to print the LCS
         printLCS(b, X, m, n);
+        System.out.println();
+        return c[m][n];
     }
 
     /*
@@ -108,9 +118,5 @@ public class LongestCommonSubsequence {
             // recursively call with one character less from second index
             printLCS(b, X, i, j - 1);
         }
-    }
-
-    public static void main(String args[]){
-        lcsLength("HELLO", "AERLKO");
     }
 }
