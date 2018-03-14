@@ -1,4 +1,13 @@
 public class MaximumSubArray {
+    public static void main(String args[]){
+        int[] test = {-2, -5, 6, -2, -3, 1, 5, -6};
+        int[] ans = maxSubarray(test);
+        System.out.print("The Max subArray is:");
+        for(int e: ans){
+            System.out.print(" "+e);
+        }
+    }
+
     public static int[] maxCrossingSubarray(int[] A, int low, int mid, int high) {
         int leftSum = Integer.MIN_VALUE;
         int sum = 0;
@@ -40,6 +49,17 @@ public class MaximumSubArray {
             else
                 return crossResult;
         }
+    }
+
+    public static int[] maxSubarray(int[] A){
+        int[] result = findMaxSubarray(A, 0, A.length - 1);
+        int start = result[0];
+        int end = result[1];
+        int[] maxSubArr = new int[end - start + 1];
+        for(int i = 0; i < maxSubArr.length; i++){
+            maxSubArr[i] = A[i + start];
+        }
+        return maxSubArr;
     }
 }
 
