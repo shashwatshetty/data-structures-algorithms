@@ -1,6 +1,6 @@
 import java.util.function.Supplier;
 
-public class RunTimeCalculator {
+public class Utilities {
 
     // benchmarking code to calculate the running time for the smallest method.
     public static <T> T time (Supplier<T> thunk) {
@@ -16,6 +16,13 @@ public class RunTimeCalculator {
         catch (Error e) {
             System.out.println ("\nERROR: " + e);
             return null;
+        }
+    }
+
+    public static void printArray(int[] A, String message){
+        System.out.println(message + " ");
+        for(int e : A) {
+            System.out.print(e + " ");
         }
     }
 }

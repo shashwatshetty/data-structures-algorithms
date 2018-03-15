@@ -7,8 +7,8 @@ public class LongestCommonSubsequence {
 
     public static void main(String args[]){
         // correctness & timing examples
-        RunTimeCalculator.time(() -> lcsLength("HELLO", "AERLKO"));
-        RunTimeCalculator.time(() -> lcsLength("ACCGGTCGAGTGCGCGGAAGCCGGCCGAA", "GTCGTTCGGAATGCCGTTGCTCTGTAAA"));
+        Utilities.time(() -> lcsLength("HELLO", "AERLKO"));
+        Utilities.time(() -> lcsLength("ACCGGTCGAGTGCGCGGAAGCCGGCCGAA", "GTCGTTCGGAATGCCGTTGCTCTGTAAA"));
     }
 
 

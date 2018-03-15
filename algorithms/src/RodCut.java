@@ -21,9 +21,9 @@ public class RodCut {
         prices.put(10,30);
 
         // correctness & timing examples
-        System.out.println("Max. Revenue for n = 8 using Memoization: "+RunTimeCalculator.time(() -> rodCutMemo(prices, 8)));
-        System.out.println("Max. Revenue for n = 8 using Recursion: "+RunTimeCalculator.time(() -> rodCutRecursive(prices, 8)));
-        System.out.println("Max. Revenue for n = 8 using DP: "+RunTimeCalculator.time(() -> rodCutDP(prices, 8)));
+        System.out.println("Max. Revenue for n = 8 using Memoization: "+Utilities.time(() -> rodCutMemo(prices, 8)));
+        System.out.println("Max. Revenue for n = 8 using Recursion: "+Utilities.time(() -> rodCutRecursive(prices, 8)));
+        System.out.println("Max. Revenue for n = 8 using DP: "+Utilities.time(() -> rodCutDP(prices, 8)));
     }
 
     /*

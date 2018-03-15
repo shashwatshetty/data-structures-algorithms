@@ -36,12 +36,6 @@ public class KSmallest {
         return res;
     }
 
-    public static void printArray(int[] res){
-        for(int e : res) {
-            System.out.print(e + " ");
-        }
-    }
-
     public static void main(String args[]){
         Random r = new Random();
         Scanner sc = new Scanner(System.in);
@@ -52,9 +46,8 @@ public class KSmallest {
         int[] test = new int[n];
         for(int i = 0; i < n; i++)
             test[i] = r.nextInt(Integer.MAX_VALUE);
-        System.out.println("For input array: ");
-        printArray(test);
-        int[] res = (int[])RunTimeCalculator.time(() -> smallest(test, k));
-        printArray(res);
+        Utilities.printArray(test, "For Input Array:");
+        int[] res = (int[])Utilities.time(() -> smallest(test, k));
+        Utilities.printArray(res, "Result Array is:");
     }
 }
